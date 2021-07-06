@@ -27,9 +27,38 @@ import '../box-styles.css'
 // }
 
 // Extra Credit 1.
-const Box = ({ children, classes, inlineStyles, ...otherProps }) => (
+// ---------------
+// const Box = ({ children, classes, inlineStyles, ...otherProps }) => (
+//   <div
+//     className={`box ${classes}`}
+//     style={{fontStyle: 'italic', ...inlineStyles}}
+//     {...otherProps}
+//   >
+//     {children}
+//   </div>
+// )
+//
+// function App() {
+//   return (
+//     <div>
+//       <Box classes="box--small" inlineStyles={{ backgroundColor: 'lightblue' }}>
+//         small lightblue box
+//       </Box>
+//       <Box classes="box--medium" inlineStyles={{ backgroundColor: 'pink' }}>
+//         medium pink box
+//       </Box>
+//       <Box classes="box--large" inlineStyles={{ backgroundColor: 'orange' }}>
+//         large orange box
+//       </Box>
+//     </div>
+//   )
+// }
+
+// Extra Credit 2.
+// ---------------
+const Box = ({ children, size, inlineStyles, ...otherProps }) => (
   <div
-    className={`box ${classes}`}
+    className={`box${size ? ` box--${size}` : ''}`}
     style={{fontStyle: 'italic', ...inlineStyles}}
     {...otherProps}
   >
@@ -40,17 +69,16 @@ const Box = ({ children, classes, inlineStyles, ...otherProps }) => (
 function App() {
   return (
     <div>
-      <Box classes="box--small" inlineStyles={{ backgroundColor: 'lightblue' }}>
+      <Box size="small" inlineStyles={{ backgroundColor: 'lightblue' }}>
         small lightblue box
       </Box>
-      <Box classes="box--medium" inlineStyles={{ backgroundColor: 'pink' }}>
+      <Box size="medium" inlineStyles={{ backgroundColor: 'pink' }}>
         medium pink box
       </Box>
-      <Box classes="box--large" inlineStyles={{ backgroundColor: 'orange' }}>
+      <Box size="large" inlineStyles={{ backgroundColor: 'orange' }}>
         large orange box
       </Box>
     </div>
   )
 }
-
 export default App
