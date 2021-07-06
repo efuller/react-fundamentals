@@ -39,7 +39,33 @@ import * as React from 'react'
 // }
 
 // Extra Credit 1.
+// function UsernameForm({onSubmitUsername}) {
+//   const nameRef = React.useRef();
+//
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//
+//     const { value = '' } = nameRef.current;
+//
+//     if ( onSubmitUsername && typeof onSubmitUsername === 'function') {
+//       onSubmitUsername(value);
+//     }
+//   }
+//
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <div>
+//         <label htmlFor="username">Username:</label>
+//         <input ref={nameRef} id="username" type="text" />
+//       </div>
+//       <button type="submit">Submit</button>
+//     </form>
+//   )
+// }
+
+// Extra Credit 2.
 function UsernameForm({onSubmitUsername}) {
+  const [error, setError] = React.useState(null);
   const nameRef = React.useRef();
 
   const handleSubmit = (e) => {
@@ -52,17 +78,32 @@ function UsernameForm({onSubmitUsername}) {
     }
   }
 
+  const nameIsValid = (value) => value === value.toLowerCase();
+
+  const handleChange = () => {
+     const { value = '' } = nameRef.current;
+
+     if (!nameIsValid(value)) {
+       setError('Username must be lower case');
+     } else {
+       setError(null);
+     }
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username:</label>
-        <input ref={nameRef} id="username" type="text" />
+        <input ref={nameRef} onChange={handleChange} id="username" type="text" />
+        {
+          ! error ? null : <span role="alert" style={{ color: 'red' }}>{error}</span>
+        }
+
       </div>
-      <button type="submit">Submit</button>
+      <button disabled={Boolean(error)} type="submit">Submit</button>
     </form>
   )
 }
-
 
 function App() {
   const onSubmitUsername = username => alert(`You entered: ${username}`)
