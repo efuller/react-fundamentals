@@ -112,7 +112,7 @@ function UsernameForm({onSubmitUsername}) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if ( onSubmitUsername && typeof onSubmitUsername === 'function') {
+    if (onSubmitUsername && typeof onSubmitUsername === 'function') {
       onSubmitUsername(name);
     }
   }
